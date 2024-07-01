@@ -7,8 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "export": "next build && next export",
-    "deploy": "npm run build && npm run export && node -e \"require('fs').writeFileSync('out/.nojekyll', '')\" && gh-pages -d out -t true"
+    "deploy": "next build && node -e \"require('fs').writeFileSync('out/.nojekyll', '')\" && gh-pages -d out -t true"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.1.0",
