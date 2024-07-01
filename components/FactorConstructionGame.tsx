@@ -45,16 +45,20 @@ export const FactorConstructionGame: React.FC = () => {
     const factorCount = calculateFactors(product);
     
     if (factorCount === parseInt(currentTab)) {
-      setConstructedNumbers({
-        ...constructedNumbers,
-        [currentTab]: [...constructedNumbers[currentTab], {
-          number: product,
-          primes: [...selectedPrimes]
-        }]
-      });
-      setMessage(`Correct! ${product} has ${factorCount} factors.`);
+      if (constructedNumbers[currentTab].some(item => item.number === product)) {
+        setMessage(`You've already constructed ${product}. Try a different combination!`);
+      } else {
+        setConstructedNumbers({
+          ...constructedNumbers,
+          [currentTab]: [...constructedNumbers[currentTab], {
+            number: product,
+            primes: [...selectedPrimes]
+          }]
+        });
+        setMessage(`Correct! ${product} has ${factorCount} factors.`);
+      }  
     } else {
-      setMessage(`Incorrect. Try again with a different combination of primes.`);
+      setMessage(`Incorrect. ${product} does not have ${currentTab} factors. Try again!`);
     }
     
     setSelectedPrimes([]);
