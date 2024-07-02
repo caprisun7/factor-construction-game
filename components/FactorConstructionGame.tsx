@@ -42,6 +42,12 @@ export const FactorConstructionGame: React.FC = () => {
 
   const handleSubmit = (): void => {
     const product = selectedPrimes.reduce((a, b) => a * b, 1);
+
+    if (product > 100) {
+      setMessage("The number must be less than or equal to 100. Try a smaller combination of primes.");
+      return;
+    }
+
     const factorCount = calculateFactors(product);
     
     if (factorCount === parseInt(currentTab)) {
@@ -67,6 +73,7 @@ export const FactorConstructionGame: React.FC = () => {
   return (
     <div className="p-4">
       <h1 className="text-2xl font-bold mb-4">Factor Construction Game</h1>
+      <p className="mb-4">Construct numbers with specific factor counts. All numbers must be less than or equal to 100.</p>
       <Tabs value={currentTab} onValueChange={setCurrentTab}>
         <TabsList>
           {[3, 4, 5, 6, 7, 8].map(num => (
